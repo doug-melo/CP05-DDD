@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Bem-vindo ao Sistema de Biblioteca</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Usuários</h5>
+                    <p class="card-text">Gerencie os usuários da biblioteca.</p>
+                    <a th:href="@{/usuarios}" class="btn btn-primary">Acessar Usuários</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Livros</h5>
+                    <p class="card-text">Gerencie os livros disponíveis.</p>
+                    <a th:href="@{/livros}" class="btn btn-primary">Acessar Livros</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Empréstimos</h5>
+                    <p class="card-text">Controle os empréstimos de livros.</p>
+                    <a th:href="@{/emprestimos}" class="btn btn-primary">Acessar Empréstimos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

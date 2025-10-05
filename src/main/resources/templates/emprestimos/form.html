@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head(title='Novo Emprestimo')"></head>
+<body>
+<h2>Novo Empréstimo</h2>
+<form th:action="@{/emprestimos/salvar}" th:object="${form}" method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Livro</label>
+    <select class="form-select" th:field="*{livroId}">
+      <option th:each="l : ${livros}" th:value="${l.id}" th:text="${l.titulo}"></option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Usuário</label>
+    <select class="form-select" th:field="*{usuarioId}">
+      <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}"></option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Data de Retirada</label>
+    <input type="date" class="form-control" th:field="*{dataRetirada}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"/>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Data Prevista de Devolução</label>
+    <input type="date" class="form-control" th:field="*{dataPrevistaDevolucao}"/>
+    <div class="text-danger" th:if="${#fields.hasErrors('dataPrevistaDevolucao')}" th:errors="*{dataPrevistaDevolucao}"></div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Registrar Empréstimo</button>
+    <a class="btn btn-secondary" th:href="@{/emprestimos}">Cancelar</a>
+  </div>
+  <a class="btn btn-secondary" th:href="@{/}">Voltar à Página Principal</a>
+</form>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

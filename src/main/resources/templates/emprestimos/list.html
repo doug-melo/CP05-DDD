@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head (~{::title='Empréstimos'})"></head>
+<body>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Empréstimos Ativos</h2>
+  <div>
+    <a class="btn btn-success" th:href="@{/emprestimos/novo}">Novo Empréstimo</a>
+    <a class="btn btn-secondary" th:href="@{/}">Voltar à Página Principal</a>
+  </div>
+</div>
+
+
+<table class="table table-bordered">
+  <thead><tr><th>Usuário</th><th>Livro</th><th>Retirada</th><th>Prevista</th><th>Ações</th></tr></thead>
+  <tbody>
+    <tr th:each="e : ${emprestimos}">
+      <td th:text="${e.usuario.nome}"></td>
+      <td th:text="${e.livro.titulo}"></td>
+      <td th:text="${e.dataRetirada}"></td>
+      <td th:text="${e.dataPrevistaDevolucao}"></td>
+      <td>
+        <form th:action="@{/emprestimos/devolver/{id}(id=${e.id})}" method="post" th:if="${!e.devolvido}">
+            <button class="btn btn-success btn-sm" type="submit">Devolver</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head (~{::title='Livro'})"></head>
+<body>
+<h2 th:text="${livro.id} != null ? 'Editar Livro' : 'Novo Livro'"></h2>
+<form th:action="@{/livros/salvar}" th:object="${livro}" method="post" class="row g-3">
+  <input type="hidden" th:field="*{id}" />
+  <div class="col-md-6">
+    <label class="form-label">Título</label>
+    <input class="form-control" th:field="*{titulo}" />
+    <div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Autor</label>
+    <input class="form-control" th:field="*{autor}" />
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Ano</label>
+    <input class="form-control" type="number" th:field="*{anoPublicacao}" />
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a class="btn btn-secondary" th:href="@{/livros}">Cancelar</a>
+  </div>
+  <a class="btn btn-secondary" th:href="@{/}">Voltar à Página Principal</a>
+</form>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

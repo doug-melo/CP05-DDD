@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head (~{::title='Livros'})"></head>
+<body>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Livros</h2>
+  <div>
+    <a class="btn btn-success me-2" th:href="@{/livros/novo}">Novo Livro</a>
+    <a class="btn btn-outline-secondary" th:href="@{/livros/disponiveis}">Somente disponíveis</a>
+    <a class="btn btn-secondary" th:href="@{/}">Voltar à Página Principal</a>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead><tr><th>Título</th><th>Autor</th><th>Ano</th><th>Status</th><th>Ações</th></tr></thead>
+  <tbody>
+    <tr th:each="livro : ${livros}">
+      <td th:text="${livro.titulo}"></td>
+      <td th:text="${livro.autor}"></td>
+      <td th:text="${livro.anoPublicacao}"></td>
+      <td th:text="${livro.emprestado} ? 'Emprestado' : 'Disponível'"></td>
+      <td>
+        <a class="btn btn-sm btn-primary" th:href="@{/livros/editar/{id}(id=${livro.id})}">Editar</a>
+        <form th:action="@{/livros/excluir/{id}(id=${livro.id})}" method="post" style="display:inline">
+          <button class="btn btn-sm btn-danger" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
